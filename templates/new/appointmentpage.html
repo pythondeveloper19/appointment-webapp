@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Latest compiled and minified CSS -->
+
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js">
+    </script>
+    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js">
+    </script>
+    <script type="text/javascript"
+            src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js">
+    </script>
+    <script type="text/javascript"
+            src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.pt-BR.js">
+    </script>
+
+     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen"
+          href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">
+    <title>APPOINTMENT</title>
+
+    <style>
+        #customers {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #customers td, #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #customers tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #customers tr:hover {
+            background-color: #ddd;
+        }
+
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+
+
+
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+                <b>APPOINTMET BOOKING</b>
+            </a>
+        </div>
+    </div>
+</nav>
+<h3>Click Here to Submit an APPOINTMENT</h3>
+<button type="button" class="btn btn-default" onclick="document.getElementById('divform').style.display='block'">
+    New
+</button>
+
+
+
+<form action="" method="post">
+    <br>
+    <div id="divform" style="display: none">
+        {#DATE:<input type="text" name="date"><br>#}
+        {#DATE:<input id="datepicker" value="date"/><br><br>#}
+        <div class="well">
+            <div id="datetimepicker1">
+                APPOINTMENT DATE :<input data-format="yyyy-dd-mm HH:mm:ss PP" type="text" name="datetime">
+    <span class="add-on">
+      <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+      </i>
+    </span>
+            </div>
+        </div>
+        {#TIME:<input type="text" name="time"><br>#}
+        <div class="well">
+        DESCRIPTION: <input type="text" name="description"><br>
+        {#        {% for i in my_data %}#}
+        {#            {{ i.label }}:{{ i }}#}
+        {#        {% endfor %}#}
+        <br><br>
+            </div>
+        <button type="submit">ADD</button>
+        <button type="button" onclick="document.getElementById('divform').style.display='block'">CANCEL</button>
+    </div>
+</form>
+
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search" id="search_id">
+                </div>
+                <button type="submit" class="btn btn-default" id="search" onclick="create_post()">Submit</button>
+            </form>
+
+        </div>
+    </div>
+</nav>
+
+<div id="rock">
+
+
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Appointments / Search Results</h3>
+
+    </div>
+    <div class="panel-body" style="overflow: scroll; width: 1200px; height: 500px;">
+
+            <div id="search_results">
+            {% if l == 0 %}
+
+                <p>NO RECORDS FOUND><br>TRY AGAIN</p>
+            {% else %}
+
+                <table id="customers">
+                    <tr>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Description</th>
+                    </tr>
+                    {% for item in records %}
+                        <tr>
+                            <td>{{ item.0 }}</td>
+
+                            <td>{{ item.1 }}</td>
+
+                            <td>{{ item.2 }}</td>
+                        </tr>
+
+                    {% endfor %}
+                </table>
+            {% endif %}
+            </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker1').datetimepicker({});
+    });
+
+    function create_post() {
+    console.log("create post is working!") // sanity check
+    alert($('#search_id').val())
+    $.ajax({
+        url : "cool/", // the endpoint
+        type : "POST", // http method
+
+        data : { the_post : $('#search_id').val() }, // data sent with the post request
+
+        // handle a successful response
+        success : function(json) {
+            $('#post-text').val(''); // remove the value from the input
+{#            alert(typeof(json.d)); // log the returned json to the console#}
+{#            alert((json.d)); // log the returned json to the console#}
+            console.log("success"); // another sanity check
+
+            var myTable= "<table><tr><td style='width: 100px; color: red;'>DATE</td>";
+            myTable+= "<td style='width: 100px; color: red; text-align: right;'>TIME</td>";
+            myTable+="<td style='width: 100px; color: red; text-align: right;'>DESCRIPTION</td></tr>";
+
+//        alert(json.d.length);
+          for (var i=0; i<json.d.length; i++) {
+            myTable+="<tr><td style='width: 100px;'>Number " + json.d[i] + " is:</td>";
+            myTable+="<td style='width: 100px; text-align: right;'>" + json.t[i] + "</td>";
+            myTable+="<td style='width: 100px; text-align: right;'>" + json.des[i] + "</td></tr>";
+          }
+           myTable+="</table>";
+            alert(myTable);
+            var tableArea=document.getElementById("rock");
+
+            tableArea.innerHTML="kunjan d";
+            var div = document.createElement('div');
+            div.innerHTML = myTable;
+            document.getElementById('rock').appendChild(div);
+
+        },
+
+        // handle a non-successful response
+        error : function(xhr,errmsg,err) {
+            $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
+                " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
+            console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+        }
+    });
+};
+
+</script>
+</body>
+</html>
